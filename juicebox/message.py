@@ -5,57 +5,41 @@ import re
 
 class Message:
     def __init__(self) -> None:
-        self.data = "" # rename to payload?
-        self.checksum = ""
+        self.payload_str = ""
+        self.checksum_str = ""
         pass
 
 
-    def from_string(self, string: str):
-        msg = re.search(r'((?P<data>.*)!(?P<checksum>[A-Z0-9]{3})(?:\$|:))', string)
+    def from_string(self, string: str) -> 'Message':
+        msg = re.search(r'((?P<payload>.*)!(?P<checksum>[A-Z0-9]{3})(?:\$|:))', string)
         
         if msg is None:
             raise InvalidMessageFormat(f"Unable to parse message: '{string}'")
         
-        self.data = msg.group('data')
-        self.checksum = msg.group('checksum')
+        self.payload_str = msg.group('payload')
+        self.checksum_str = msg.group('checksum')
         return self
     
 
-    def checksum(self):
-        return Checksum(self)
+    def checksum(self) -> Checksum:
+        return Checksum(self.payload_str)
         
 
-    def build(self):
-        self.data = [
-            self.dest,
-            self.src,
-            *self.encode_msg_class(self.msg_class),
-            self.type,
-            len(payload),
-            *payload,
-        ]
-
-        self.data.append(self.calc_checksum(self.data))
-
-        return self
+    def checksum_computed(self) -> str:
+        return self.checksum().base35()
 
 
-    def inspect(self):
+    def build(self) -> str:
+        return f"{self.payload_str}!{self.checksum.base35()}$"
+
+
+    def inspect(self) -> dict:
         return {
-            "dest": self.dest,
-            "src": self.src,
-            "msg_class": Constants.MSG_CLASSES.get(self.msg_class, 0)['name'],
-            "msg_type": Constants.MSG_TYPES.get(self.type, f"<unknown: {self.type}>"),
-            "payload": self.payload.to_dict(),
+            "payload_str": self.payload_str,
+            "checksum_str": self.checksum_str,
+            "checksum_computed": self.checksum_computed(),
         }
 
 
     def __str__(self):
-        """
-        Returns hexadecimal bytestring representation of the entire message: '82 80 A4 10'
-        """
-        self.build()
-
-        data = list(map(self.to_hex, self.data))
-
-        return " ".join(data)
+        return self.build()
