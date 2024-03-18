@@ -8,13 +8,7 @@ class Message:
         self.payload_str = None
         self.checksum_str = None
 
-        # Offline Amperage
-        # Stored in the microcontroller's EEPROM as "wire rating", and it takes effect immediately on startup.
         self.offline_amperage = 0
-
-        # Instant Amperage
-        # When online, tells the box how many amps to allow. Anything below 6A disallows/disables charging, causing the Charge LED to flash when plugged in.
-        # The instant/runtime amp command is fleeting, it only matters while the box is online/receiving regular CMD reports from each of its runtime report packets.
         self.instant_amperage = 0
 
         self.command = 6 # Alternates between C242, C244, C008, C006. Meaning unclear.
