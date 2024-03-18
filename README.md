@@ -16,7 +16,7 @@ from juicebox.message import Message
 m = Message()
 m.offline_amperage = 20
 m.instant_amperage = 16
-m.command = 6
+m.command = 6 # TODO: still not sure what this does
 m.message_counter = 1
 
 print(m.build())
