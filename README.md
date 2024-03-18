@@ -8,7 +8,7 @@ Basic library for building and parsing Juicebox UDP messages. Shoutout to @Falco
 
 ## TODO
 
-- [ ] Figure out what the "command" field does: C242, C244, C008, C006 (naming is mine, not sure if it's actually a command)
+- [ ] Figure out what the "command" field does (naming is mine, not sure if it's actually a command)
 - [ ] Figure out what the counter is for.
 - [ ] Integrate into Juicepassproxy (JPP) to get it to actually send a message to the Juicebox (HA > MQTT > JPP > Juicebox)
 - [ ] Support parsing status messages
@@ -71,10 +71,10 @@ CMD62210A20M18C006S006!31Y$
 CMD    # Prefix
 6      # Day of week (6 = Saturday, 0 = Sunday).
 2210   # Local time (22:10)
-A20    # Offline Amperage (aka Wire Rating)
+A20    # Offline Amperage
 M18    # Instant Amperage
-C006   # Command? Alternates between C242, C244, C008, C006
-S006   # Message counter? (increments by one for every message until 999 then it loops back to 001)
+C006   # Command?
+S006   # Message counter?
 !      # Delimiter between payload and checksum
 31Y    # Checksum (base35) calculated from payload
 $      # Suffix
@@ -101,6 +101,14 @@ The "instant amperage" command is fleeting, it only matters while the box is onl
 Precedence of amperage limit is: Unit rating > Offline amperage > Runtime amperage. So if unit rating is 32, sending offline amperage 40 / runtime 40, the unit rating (baked into firmware code, non-modifiable) takes precedence and you get 32 amps. If unit rating=40, offline=32, runtime=16, you get 16 amps. Similarly, unit=40, offline=16, runtime=32, you ought to get 16 amps, but server architecture always prevented that from being sent, so the behavior may be undefined (if it's online, it should go 32, but if it goes offline / hasn't received a command in about 5 minutes, you may get 16).
 
 Source: [FalconFour](https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548)
+
+### Command (?)
+
+Alternates between C242, C244, C008, C006. Purpose unclear.
+
+### Message counter (?)
+
+Increments by one for every message until 999 then it loops back to 001. Purpose unclear.
 
 ### TBD
 
