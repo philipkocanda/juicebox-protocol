@@ -1,4 +1,3 @@
-from juicebox.constants import Constants
 from juicebox.checksum import Checksum
 from juicebox.exceptions import InvalidMessageFormat
 import re
