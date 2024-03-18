@@ -45,3 +45,21 @@ Run all unit tests:
 ```sh
 bin/test
 ```
+
+## Message Format
+
+```
+Example message:
+
+CMD62210A20M18C006S006999!31Y$
+
+CMD    # Prefix
+6      # Day of week (6 = Saturday, 0 = Sunday)
+2210   # Local time (22:10)
+A20    # Offline Amperage
+M18    # Instant Amperage
+C006   # Command? Alternates between C242, C244, C008, C006
+S006   # Message counter? (increments by one for every message until 999 then it loops back to 001)
+!31Y$  # Checksum
+
+```
