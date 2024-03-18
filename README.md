@@ -4,15 +4,15 @@ Basic library for building and parsing Juicebox UDP messages. Shoutout to @Falco
 
 ## Features
 
-- Building command messages
+- [x] Build command (CMD) messages
 
 ## TODO
 
-- Figure out what the "command" field does: C242, C244, C008, C006 (naming is mine, not sure if it's actually a command)
-- Figure out what the counter is for.
-- Integrate into Juicepassproxy (JPP) to get it to actually send a message to the Juicebox (HA > MQTT > JPP > Juicebox)
-- Support parsing status messages
-- Nice to have for consistency: Support parsing command messages
+- [ ] Figure out what the "command" field does: C242, C244, C008, C006 (naming is mine, not sure if it's actually a command)
+- [ ] Figure out what the counter is for.
+- [ ] Integrate into Juicepassproxy (JPP) to get it to actually send a message to the Juicebox (HA > MQTT > JPP > Juicebox)
+- [ ] Support parsing status messages
+- [ ] Nice to have for consistency: Support parsing command messages
 
 ## Tested devices
 
@@ -77,15 +77,17 @@ S006   # Message counter? (increments by one for every message until 999 then it
 !31Y$  # Checksum
 ```
 
-Source: https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548
-
 ### Day of week and local time
 
 Setting the internal clock based on the local time zone for offline time of use.
 
+Source: [FalconFour](https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548)
+
 ### Offline Amperage (aka Wire Rating)
 
 Stored in the microcontroller's EEPROM as "wire rating", and it takes effect immediately on startup.
+
+Source: [FalconFour](https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548)
 
 ### Instant Amperage
 
@@ -95,9 +97,12 @@ The "instant amperage" command is fleeting, it only matters while the box is onl
 
 Precedence of amperage limit is: Unit rating > Offline amperage > Runtime amperage. So if unit rating is 32, sending offline amperage 40 / runtime 40, the unit rating (baked into firmware code, non-modifiable) takes precedence and you get 32 amps. If unit rating=40, offline=32, runtime=16, you get 16 amps. Similarly, unit=40, offline=16, runtime=32, you ought to get 16 amps, but server architecture always prevented that from being sent, so the behavior may be undefined (if it's online, it should go 32, but if it goes offline / hasn't received a command in about 5 minutes, you may get 16).
 
+Source: [FalconFour](https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548)
+
 ### TBD
 
 > There is also a bit mask in there that determines "whether the user is looking at the app now", which increases the report interval from 10 seconds when charging (I believe) and 30 seconds when idle, to 3 seconds for both modes.
 
 > if I'm recalling/reading correctly, the first part of the command (several numeric digits) is setting the clock, and the final one is sending time-of-use hours with a bit mask (weekday start, weekday end, weekend start, weekend end) - this is all inherited from wayyyy old protocol back in 2014 or so when this silly protocol was first devised.
 
+Source: [FalconFour](https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548)
