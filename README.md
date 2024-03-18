@@ -1,5 +1,7 @@
 # Juicebox Protocol
 
+Basic library for building and parsing Juicebox UDP messages. Shoutout to @FalconFour and @jesserockz who were instrumental in getting this to work and whose code I've reused in this repo. See [this issue](https://github.com/snicker/juicepassproxy/issues/39) for more.
+
 ## Tested devices
 
 - Juicebox 32A 3-phase 2018 (v7)
