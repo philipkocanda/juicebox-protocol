@@ -1,5 +1,5 @@
-from juicebox.checksum import Checksum
-from juicebox.exceptions import InvalidMessageFormat
+from .checksum import Checksum
+from .exceptions import InvalidMessageFormat
 import re
 import datetime
 

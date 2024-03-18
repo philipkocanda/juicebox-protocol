@@ -77,7 +77,7 @@ C006   # Command? Alternates between C242, C244, C008, C006
 S006   # Message counter? (increments by one for every message until 999 then it loops back to 001)
 !      # Delimiter between payload and checksum
 31Y    # Checksum (base35) calculated from payload
-$      # Suffix
+$      # Postfix
 ```
 
 ### Day of week and local time

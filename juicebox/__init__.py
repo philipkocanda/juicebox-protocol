@@ -1,3 +1,3 @@
-from juicebox.message import Message
-from juicebox.checksum import Checksum
+from .message import Message
+from .checksum import Checksum
 
