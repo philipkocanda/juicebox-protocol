@@ -65,7 +65,7 @@ Command messages sent to the Juicebox by the server on regular intervals:
 ```
 Example message:
 
-CMD62210A20M18C006S006999!31Y$
+CMD62210A20M18C006S006!31Y$
 
 CMD    # Prefix
 6      # Day of week (6 = Saturday, 0 = Sunday).
