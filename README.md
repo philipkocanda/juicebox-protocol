@@ -79,7 +79,7 @@ S006   # Message counter? (increments by one for every message until 999 then it
 
 ### Day of week and local time
 
-Setting the internal clock based on the local time zone for offline time of use.
+Sets the internal clock based on the local time zone for offline time of use.
 
 Source: [FalconFour](https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548)
 
