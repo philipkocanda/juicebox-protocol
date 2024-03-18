@@ -20,7 +20,7 @@ class Message:
         self.command = 6 # Alternates between C242, C244, C008, C006. Meaning unclear.
 
         # increments by one for every message until 999 then it loops back to 1
-        self.message_counter = 1
+        self.counter = 1
 
         self.time = datetime.datetime.today()
 
@@ -54,7 +54,7 @@ class Message:
 
         # Instant amperage may need to be represented using 4 digits (e.g. 0040)
         # on newer Juicebox versions.
-        self.payload_str = f"CMD{weekday}{self.time.strftime('%H%M')}A{self.offline_amperage:02d}M{self.instant_amperage:02d}C{self.command:03d}S{self.message_counter:03d}"
+        self.payload_str = f"CMD{weekday}{self.time.strftime('%H%M')}A{self.offline_amperage:02d}M{self.instant_amperage:02d}C{self.command:03d}S{self.counter:03d}"
         self.checksum_str = self.checksum_computed()
 
 
