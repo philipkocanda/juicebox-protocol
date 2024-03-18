@@ -9,6 +9,8 @@ class TestMessage(unittest.TestCase):
         m.time = datetime.datetime(2012, 3, 23, 23, 24, 55, 173504)
         m.offline_amperage = 20
         m.instant_amperage = 16
+        print(m.build())
+        print(m.inspect())
         self.assertEqual(m.build(), "CMD52324A20M16C006S001!5RE$")
 
 

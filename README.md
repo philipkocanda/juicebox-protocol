@@ -17,7 +17,7 @@ print(m.build())
 # CMD52324A20M16C006S001!5RE$
 
 print(m.inspect())
-# {'offline_amperage': 20, 'instant_amperage': 0, 'payload_str': 'CMD52324A20M00C006S001', 'checksum_str': None, 'checksum_computed': '6N8'}
+# {'offline_amperage': 20, 'instant_amperage': 16, 'payload_str': 'CMD52324A20M16C006S001', 'checksum_str': '5RE', 'checksum_computed': '5RE'}
 ```
 
 ## Unit Tests
