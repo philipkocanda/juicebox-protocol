@@ -48,6 +48,9 @@ bin/test
 
 ## Message Format
 
+Message sent to Juicebox:
+
+
 ```
 Example message:
 
@@ -61,5 +64,6 @@ M18    # Instant Amperage
 C006   # Command? Alternates between C242, C244, C008, C006
 S006   # Message counter? (increments by one for every message until 999 then it loops back to 001)
 !31Y$  # Checksum
-
 ```
+
+Source: https://github.com/snicker/juicepassproxy/issues/39#issuecomment-2002312548
