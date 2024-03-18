@@ -7,7 +7,7 @@ class Checksum:
 
     def integer(self) -> int:
         return self.crc(self.payload)
-    
+
 
     def base35(self) -> str:
         return self.base35encode(self.integer())
@@ -19,7 +19,7 @@ class Checksum:
             "base35": self.base35(),
             "integer": self.integer(),
         }
-    
+
     def base35encode(self, number: int) -> str:
         base35 = ""
 
