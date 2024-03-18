@@ -2,8 +2,18 @@ import unittest
 from juicebox.checksum import Checksum
 from juicebox.message import Message
 from juicebox.exceptions import InvalidMessageFormat
+import datetime
 
 class TestMessage(unittest.TestCase):
+    def test_message_building(self):
+        m = Message()
+        m.time = datetime.datetime(2012, 3, 23, 23, 24, 55, 173504)
+        m.offline_amperage = 20
+        m.offline_amperage = 20
+        print(m.build())
+        self.assertEqual(m.build(), "CMD52324A20M00C006S001!6N8$")
+
+
     def test_message_validation(self):
         with self.assertRaises(InvalidMessageFormat):
             m = Message().from_string("g4rbl3d")
@@ -13,19 +23,24 @@ class TestMessage(unittest.TestCase):
         """
         Command messages are typically sent by the Cloud to the JuiceBox
         """
-        m = Message().from_string("CMD41325A0040M040C006S638!5N5$")
+        raw_msg = "CMD41325A0040M040C006S638!5N5$"
+        m = Message().from_string(raw_msg)
         self.assertEqual(m.payload_str, "CMD41325A0040M040C006S638")
         self.assertEqual(m.checksum_str, "5N5")
         self.assertEqual(m.checksum_str, m.checksum_computed())
+        self.assertEqual(m.build(), raw_msg)
 
     def test_status_message_parsing(self):
         """
         Status messages are sent by the JuiceBox
         """
-        m = Message().from_string("0910042001260513476122621631:v09u,s627,F10,u01254993,V2414,L00004555804,S01,T08,M0040,C0040,m0040,t29,i75,e00000,f5999,r61,b000,B0000000!55M:")
+        raw_msg = "0910042001260513476122621631:v09u,s627,F10,u01254993,V2414,L00004555804,S01,T08,M0040,C0040,m0040,t29,i75,e00000,f5999,r61,b000,B0000000!55M:"
+
+        m = Message().from_string(raw_msg)
         self.assertEqual(m.payload_str, "0910042001260513476122621631:v09u,s627,F10,u01254993,V2414,L00004555804,S01,T08,M0040,C0040,m0040,t29,i75,e00000,f5999,r61,b000,B0000000")
         self.assertEqual(m.checksum_str, "55M")
         self.assertEqual(m.checksum_str, m.checksum_computed())
+        # self.assertEqual(m.build(), raw_msg)
 
     def test_message_checksums(self):
         messages = [
