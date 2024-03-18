@@ -63,9 +63,10 @@ bin/test
 Command messages sent to the Juicebox by the server on regular intervals:
 
 ```
-Example message:
-
 CMD62210A20M18C006S006!31Y$
+^^^^^^^^^^^^^^^^^^^^^^ ^^^
+          |             |
+       payload       checksum
 
 CMD    # Prefix
 6      # Day of week (6 = Saturday, 0 = Sunday).
@@ -74,7 +75,9 @@ A20    # Offline Amperage (aka Wire Rating)
 M18    # Instant Amperage
 C006   # Command? Alternates between C242, C244, C008, C006
 S006   # Message counter? (increments by one for every message until 999 then it loops back to 001)
-!31Y$  # Checksum
+!      # Delimiter between payload and checksum
+31Y    # Checksum (base35) calculated from payload
+$      # Suffix
 ```
 
 ### Day of week and local time
