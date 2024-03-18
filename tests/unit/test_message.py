@@ -1,5 +1,4 @@
 import unittest
-from juicebox.checksum import Checksum
 from juicebox.message import Message
 from juicebox.exceptions import InvalidMessageFormat
 import datetime
@@ -9,9 +8,8 @@ class TestMessage(unittest.TestCase):
         m = Message()
         m.time = datetime.datetime(2012, 3, 23, 23, 24, 55, 173504)
         m.offline_amperage = 20
-        m.offline_amperage = 20
-        print(m.build())
-        self.assertEqual(m.build(), "CMD52324A20M00C006S001!6N8$")
+        m.instant_amperage = 16
+        self.assertEqual(m.build(), "CMD52324A20M16C006S001!5RE$")
 
 
     def test_message_validation(self):
