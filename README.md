@@ -2,6 +2,8 @@
 
 Basic library for building and parsing Juicebox UDP messages. Shoutout to @FalconFour and @jesserockz who were instrumental in getting this to work and [whose code](https://gist.github.com/jesserockz/276441f58892b7b425910bf9144cba39) I've reused in this library. See [this issue](https://github.com/snicker/juicepassproxy/issues/39) for more.
 
+Used to implement local control for Juicepassproxy in [this pull request](https://github.com/JuiceRescue/juicepassproxy/pull/69).
+
 ## Features
 
 - [x] Build command (CMD) messages
